@@ -136,33 +136,68 @@ class CameraReader:
 
     def __init__(self, logger):
         self.logger = logger
+        self.last_capture_time = 0
+        self.min_capture_interval = 0.3  # Minimum 300ms between captures
 
     def capture_image(self):
         """Capture an image from the camera"""
+        process = None
         try:
+            # Ensure minimum interval between captures
+            current_time = time.time()
+            time_since_last = current_time - self.last_capture_time
+            if time_since_last < self.min_capture_interval:
+                wait_time = self.min_capture_interval - time_since_last
+                self.logger.debug(f"Waiting {wait_time:.2f}s before next capture")
+                time.sleep(wait_time)
+
+            # Kill any lingering libcamera-still processes
+            try:
+                subprocess.run(["pkill", "-f", "libcamera-still"], timeout=1)
+                time.sleep(0.1)  # Brief pause to ensure process cleanup
+            except:
+                pass  # Ignore errors from pkill
+
             # Use libcamera-still to capture image to stdout
             cmd = [
                 "libcamera-still",
                 "-t", str(config.CAMERA_WAIT_TIME),
                 "--width", str(config.CAMERA_WIDTH),
                 "--height", str(config.CAMERA_HEIGHT),
+                "--nopreview",  # Add nopreview flag to reduce resource usage
                 "-o", "-"  # Output to stdout
             ]
 
-            result = subprocess.run(cmd, capture_output=True, check=True)
+            # Use Popen for better process control
+            process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-            if result.returncode == 0 and result.stdout:
-                self.logger.debug(f"Captured image: {len(result.stdout)} bytes")
-                return result.stdout
-            else:
-                self.logger.error("Failed to capture image: no data received")
+            try:
+                stdout, stderr = process.communicate(timeout=3)
+                self.last_capture_time = time.time()
+
+                if process.returncode == 0 and stdout:
+                    self.logger.debug(f"Captured image: {len(stdout)} bytes")
+                    return stdout
+                else:
+                    self.logger.error(f"Camera capture failed with code {process.returncode}")
+                    if stderr:
+                        self.logger.debug(f"Camera stderr: {stderr.decode('utf-8', errors='ignore')[:200]}")
+                    return None
+
+            except subprocess.TimeoutExpired:
+                self.logger.error("Camera capture timeout - killing process")
+                process.kill()
+                process.wait(timeout=1)
                 return None
 
-        except subprocess.CalledProcessError as e:
-            self.logger.error(f"Camera capture failed: {e}")
-            return None
         except Exception as e:
             self.logger.error(f"Unexpected error during camera capture: {e}")
+            if process and process.poll() is None:
+                try:
+                    process.kill()
+                    process.wait(timeout=1)
+                except:
+                    pass
             return None
 
 

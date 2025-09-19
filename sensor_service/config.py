@@ -27,7 +27,7 @@ LIDAR_FREQUENCY = 15        # Hz
 # Camera settings
 CAMERA_WIDTH = 1920
 CAMERA_HEIGHT = 1080
-CAMERA_WAIT_TIME = 1000     # Milliseconds to wait for camera
+CAMERA_WAIT_TIME = 100      # Milliseconds to wait for camera (reduced from 1000 to avoid conflicts)
 
 # File names for current data
 CURRENT_IMAGE_FILE = "current.jpg"

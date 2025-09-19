@@ -2,5 +2,5 @@ venv
 *~
 *.swp
 metrics_data/*
-__pycache__/*
-*.log
+sensor_sevice/__pycache__/*
+logs/*
