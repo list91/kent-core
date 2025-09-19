@@ -1,0 +1,26 @@
+2025-09-19 08:48:39 - sensor_listener - INFO - Initializing sensor listener...
+2025-09-19 08:48:39 - sensor_listener - INFO - Listening on 0.0.0.0:5555
+2025-09-19 08:49:27 - sensor_listener - INFO - Initializing sensor listener...
+2025-09-19 08:49:27 - sensor_listener - ERROR - Server error: [Errno 98] Address already in use
+2025-09-19 08:52:27 - sensor_listener - INFO - Initializing sensor listener...
+2025-09-19 08:52:27 - sensor_listener - INFO - Killing process 2715 using port 5555
+2025-09-19 08:52:28 - sensor_listener - INFO - Listening on 0.0.0.0:5555
+2025-09-19 08:52:37 - sensor_listener - WARNING - Invalid request from 127.0.0.1: 
+2025-09-19 08:57:00 - sensor_listener - INFO - Sent data to 192.168.0.102: timestamp=1758247018.17, image=285451 bytes, csv=525 bytes
+2025-09-19 08:58:57 - sensor_listener - INFO - Sent data to 192.168.0.102: timestamp=1758247134.26, image=285730 bytes, csv=529 bytes
+2025-09-19 08:59:22 - sensor_listener - INFO - Sent data to 192.168.0.102: timestamp=1758247159.83, image=286649 bytes, csv=531 bytes
+2025-09-19 09:00:39 - sensor_listener - INFO - Initializing sensor listener...
+2025-09-19 09:00:39 - sensor_listener - INFO - Killing process 2755 using port 5555
+2025-09-19 09:00:40 - sensor_listener - INFO - Listening on 0.0.0.0:5555
+2025-09-19 09:00:51 - sensor_listener - WARNING - Invalid request from 127.0.0.1: 
+2025-09-19 09:02:03 - sensor_listener - INFO - Initializing sensor listener...
+2025-09-19 09:02:03 - sensor_listener - INFO - Killing process 6225 using port 5555
+2025-09-19 09:02:04 - sensor_listener - INFO - Listening on 0.0.0.0:5555
+2025-09-19 09:02:15 - sensor_listener - WARNING - Invalid request from 127.0.0.1: 
+2025-09-19 09:02:27 - sensor_listener - INFO - Sent data to 192.168.0.102: timestamp=1758247345.17, image=291246 bytes, csv=521 bytes
+2025-09-19 09:02:48 - sensor_listener - INFO - Sent data to 192.168.0.102: timestamp=1758247365.74, image=283255 bytes, csv=522 bytes
+2025-09-19 09:03:47 - sensor_listener - INFO - Sent data to 192.168.0.102: timestamp=1758247424.52, image=283331 bytes, csv=522 bytes
+2025-09-19 09:04:05 - sensor_listener - INFO - Initializing sensor listener...
+2025-09-19 09:04:05 - sensor_listener - INFO - Killing process 6354 using port 5555
+2025-09-19 09:04:06 - sensor_listener - INFO - Listening on 0.0.0.0:5555
+2025-09-19 09:04:28 - sensor_listener - INFO - Sent data to 192.168.0.102: timestamp=1758247465.17, image=285247 bytes, csv=509 bytes
